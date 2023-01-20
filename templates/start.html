@@ -10,6 +10,7 @@
       href="{{ url_for('static',filename='styles/new.css') }}"
     />
     <title>Stones Inc.</title>
+    <script src="{{ url_for('static', filename='js/starthide.js') }}"></script>
   </head>
   <body>
     <div class="login-box">
@@ -17,27 +18,27 @@
       <h2>Hello</h2>
       <form action="{{ url_for('create_folder') }}" method="post" >
         <div class="user-box">
-          <label for="input">You can select from existing here:</label><br />
-          <div class="formbuilder-select form-group field-select-1671271428957">
-            <label for="select-1671271428957" class="formbuilder-select-label"
-              >You can select from existing here:</label
-            ><br />
-            <select
-              class="form-control"
-              name="folder"
-              id="folder"
-            >
-              {% for option in options %}
-              <option>{{ option }}</option>
-              {% endfor %}
-            </select>
-          </div>
+            <label for="input">You can select from existing here:</label><br />
+            <div class="formbuilder-select form-group field-select-1671271428957">
+                <label for="select-1671271428957" class="formbuilder-select-label"
+                  >You can select from existing here:</label
+                ><br />
+                <select
+                  class="form-control"
+                  name="folder"
+                  id="folder"
+                >
+                  {% for option in options %}
+                  <option>{{ option }}</option>
+                  {% endfor %}
+                </select>
+            </div>
         </div>
-        
-        <div class="user-box">
-        
-          <input type="text" name="folder_name" value="" placeholder="Enter the Folder Name" /><br />
-    <button class="submit-button" type="submit">
+            
+        <div class="user-box" id="other_folder" style="display:none;">
+            <input type="text" name="folder_name" value="" placeholder="Enter the Folder Name" /><br />
+        </div>
+        <button class="submit-button" type="submit">
         <h3>
         Select Folder</h3>
         </button>
@@ -80,6 +81,15 @@ function callRoute(Route) {
 
 function redirectToRoute(route) {
   window.location.href = route;
+}
+var select = document.getElementById("folder");
+var input = document.getElementById("other_folder");
+select.onchange = function(){
+  if (select.value === "Create new folder") {
+    input.style.display = "block";
+  } else {
+    input.style.display = "none";
+  }
 }
 
 
